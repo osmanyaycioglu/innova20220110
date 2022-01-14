@@ -1,0 +1,43 @@
+app:
+  name: osman
+  patch: 3
+  test: 123
+  version: 1
+aspect:
+  enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+server:
+  error:
+    include-binding-errors: always
+    include-exception: true
+    include-message: always
+    include-stacktrace: always
+  http2:
+    enabled: false
+  port: ${app.port:9090}
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: 123456
+    url: jdbc:postgresql://localhost:5432/training
+    username: postgres
+  jpa:
+    show-sql: false
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL94Dialect
+        format_sql: false
+        show_sql: false
+  rabbitmq:
+    host: localhost
+    password: guest
+    port: 5672
+    username: guest
+

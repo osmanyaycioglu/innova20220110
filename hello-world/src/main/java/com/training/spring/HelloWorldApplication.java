@@ -1,13 +1,18 @@
 package com.training.spring;
 
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
+@EnableRabbit
 @ServletComponentScan
 public class HelloWorldApplication {
 
@@ -21,6 +26,11 @@ public class HelloWorldApplication {
 
     @Autowired
     private AppProp ap;
+
+    @Bean
+    public MessageConverter messageConverter() {
+        return new Jackson2JsonMessageConverter();
+    }
 
     // @Scheduled(fixedDelay = 2_000, initialDelay = 2_000)
     public void hello() {
